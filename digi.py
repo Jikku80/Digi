@@ -47,7 +47,7 @@ model.compile(loss='categorical_crossentropy', optimizer = OPTIMIZER, metrics=['
 #training the model
 history = model.fit(X_train, Y_train, batch_size = BATCH_SIZE, epochs = NB_EPOCH, verbose = VERBOSE, validation_split = VALIDATION_SPLIT)
 #Save model
-tf.saved_model.save(model, 'C:/Users/jamsm/Downloads')
+model.save("models.keras")
 #testing the score and accuracy
 score = model.evaluate(X_test, Y_test, verbose = VERBOSE)
 print("Test Score: ", score[0])
