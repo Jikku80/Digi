@@ -5,7 +5,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.optimizers import Adam
 from tensorflow.keras.utils import to_categorical
-import tensorflow as tf
+# import tensorflowjs as tfjs
 
 np.random.seed(1671)
 
@@ -44,10 +44,15 @@ model.add(Activation('softmax'))
 model.summary()
 
 model.compile(loss='categorical_crossentropy', optimizer = OPTIMIZER, metrics=['accuracy'])
-#training the model
+#training the model-
 history = model.fit(X_train, Y_train, batch_size = BATCH_SIZE, epochs = NB_EPOCH, verbose = VERBOSE, validation_split = VALIDATION_SPLIT)
 #Save model
+# tfjs.converters.save_keras_model(model, 'models')
 model.save("models.keras")
+#save model in json format
+model_json = model.to_json()
+with open("my_model.json", "w") as json_file:
+    json_file.write(model_json)
 #testing the score and accuracy
 score = model.evaluate(X_test, Y_test, verbose = VERBOSE)
 print("Test Score: ", score[0])
